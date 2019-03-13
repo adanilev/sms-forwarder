@@ -1,0 +1,24 @@
+service: sms-forwarder
+
+plugins:
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  profile: ${env:SLS_AWS_PROFILE}
+  stage: ${env:SLS_STAGE}
+  region: ${env:SLS_AWS_REGION}
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'ssm:GetParameter'
+      Resource: 'arn:aws:ssm:ap-southeast-2:${env:SLS_AWS_ACCOUNT_ID}:parameter/${env:SLS_STAGE}/sms-forwarder/*'
+
+functions:
+  new-message:
+    handler: handler.forward
+    events:
+      - http:
+          path: sms/forward
+          method: post

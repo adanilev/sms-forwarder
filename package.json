@@ -1,0 +1,24 @@
+{
+  "name": "sms-forwarder",
+  "version": "1.0.0",
+  "description": "Forward SMSs using Twilio and Lambda",
+  "main": "handler.js",
+  "author": "Alex Danilevsky",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adanilev/sms-forwarder"
+  },
+  "scripts": {
+    "sls-deploy": "node -r dotenv/config ./node_modules/serverless/bin/serverless deploy -v",
+    "sls-remove": "node -r dotenv/config ./node_modules/serverless/bin/serverless remove -v"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.407.0",
+    "twilio": "^3.28.1"
+  },
+  "devDependencies": {
+    "serverless": "^1.38.0",
+    "serverless-dotenv-plugin": "^2.0.1"
+  }
+}
